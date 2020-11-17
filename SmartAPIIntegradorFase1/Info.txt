@@ -1,0 +1,3 @@
+﻿Usado nas portas:
+8094 produção
+8095 homologação

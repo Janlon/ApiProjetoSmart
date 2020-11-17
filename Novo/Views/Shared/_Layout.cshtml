@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body lang="pt-br">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        @Html.ActionLink("SmartAPI", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" title="SmartAPI" href="@Url.Action("Index", "Home", new { area = "" })">Home <span class="sr-only">(current)</span></a>
+                </li>
+                @*<li class="nav-item">
+                    @Html.ActionLink("API", "Index", "Help", new { area = "" }, new { @class = "nav-link", @title = "API support" })
+                </li>*@
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-4" type="text" placeholder="Localizar..." aria-label="Localizar">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="im im-eye" title="Localizar..."></i> </button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container body-content text-light">
+        @RenderBody()
+    </div>
+
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">&copy; @DateTime.Now.Year - SmartAPI</span>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
