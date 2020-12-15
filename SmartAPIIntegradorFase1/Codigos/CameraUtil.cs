@@ -5,6 +5,7 @@
 // Assembly location: G:\VOPAK\Source\sam\Api_Smart\bin\WebApiBusiness.dll
 
 using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -98,7 +99,7 @@ namespace WebApiBusiness.App_Data
         try
         {
           int totalConfidence = carmen1.totalConfidence;
-          carmen2 = new JavaScriptSerializer().Deserialize<Carmen>(CameraUtil.GetCarmenApi(base64).Result);
+          carmen2 = new JavaScriptSerializer().Deserialize<Carmen>(CameraUtil.GetOcr(captura.IdLocal).Result);
           if (carmen2.totalConfidence >= totalConfidence)
           {
             carmen1 = carmen2;
@@ -162,5 +163,15 @@ namespace WebApiBusiness.App_Data
       }
       return CameraUtil.CapturaFrames(listCamBalanca, framesPorCamera - 1, imgsBase64);
     }
-  }
+
+        public static async Task<string> GetOcr(int camId)
+        {
+            var client = new RestClient($"http://{ConfigurationManager.AppSettings["EmWebSocketApi"].ToString()}/");
+            var request = new RestRequest("OCR", DataFormat.Json);
+            request.AddParameter("camId", camId);
+
+            return await client.GetAsync<string>(request);
+        }
+    }
+
 }
